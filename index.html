@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monasteries 360° - Virtual Tour of Sikkim's Sacred Monasteries</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ai-components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Favicon will be added later -->
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;">
+                    <img src="images/moni.jpg" alt="Monastery Logo" style="height:40px;width:40px;object-fit:cover;border-radius:50%;margin-left:12px;">
+                    <h1 style="margin:0;font-size:2rem;color:#2c2c38;font-weight:700;">Monastery 360°</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="gemini-demo.html">Gemini AI</a>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="account-icon"><i class="fas fa-user-circle"></i></a>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Discover the Heritage of Sikkim</h1>
+                <p>Embark on a virtual pilgrimage to the sacred monasteries nestled in the heart of the Himalayas.</p>
+            </div>
+        </section>
+        <style>
+        .hero {
+            width: 100vw;
+            min-height: 400px;
+            background: url('images/mountains1.jpg') center center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .hero-content {
+            color: #fff;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        </style>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <h2>Monasteries of Sikkim</h2>
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="monasterySearch" placeholder="Search monasteries...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="filter-dropdown">
+                        <select id="sortOrder">
+                            <option value="">Newest to...</option>
+                            <option value="newest">Newest to Oldest</option>
+                            <option value="oldest">Oldest to Newest</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monasteries Grid -->
+        <section class="monasteries-grid">
+            <div class="container">
+                <div class="grid"></div>
+                <button id="loadMoreBtn" class="load-more-btn">Load More</button>
+            </div>
+        </section>
+
+        <!-- Upcoming Festivals -->
+        <section class="festivals-section">
+            <div class="container">
+                <h2>Upcoming Festivals & Rituals</h2>
+                <div class="festival-slider">
+                    <!-- Festival Example -->
+                    <div class="festival-card">
+                        <img src="images/Enchey_Monastery_in_Gangtok_district,_East_Sikkim.jpeg" alt="Losar Festival" class="festival-img">
+                        <h3>Losar Festival</h3>
+                        <p>The Tibetan New Year celebrated with vibrant rituals and dances in Sikkim's monasteries. Experience mask dances, music, and local cuisine.</p>
+                    </div>
+
+                    <div class="festival-card">
+                        <img src="images/bhumchu-festival1.jpg" alt="Bumchu Festival" class="festival-img">
+                        <h3>Bumchu Festival</h3>
+                        <p>A sacred ritual held at Tashiding Monastery, marking prosperity and peace. The holy water pot is opened to predict the fortunes of Sikkim for the year.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <h2>Explore on Map</h2>
+            <div id="map" style="height:400px;width:100%;border-radius:12px;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="Monastery 360 Logo" class="footer-logo-img">
+                    <h2>Monastery 360°</h2>
+                    <p>Explore the sacred monasteries of Sikkim through immersive virtual tours.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="monasteries.html">Monasteries</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="gemini-demo.html">Gemini AI</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter Signup</h3>
+                    <p>Stay updated with our latest tours and festival information.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit" class="btn-submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Monastery 360°. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/gemini-ai.js"></script>
+    <script src="js/monastery-ai.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/monasteries.js"></script>
+    
+    <!-- Chatbot Container -->
+    <div id="monastery-chatbot-container" class="chatbot-container">
+        <button id="chatbot-toggle" class="chatbot-toggle"></button>
+        <div id="chatbot-box" class="chatbot-box hidden">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> Monastery AI Assistant</h3>
+                <button id="chatbot-close" class="chatbot-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages"></div>
+            <div class="chatbot-input-container">
+                <input type="text" id="chatbot-input" placeholder="Ask about monasteries...">
+                <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      var map = L.map('map').setView([27.5330, 88.5122], 8);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      L.marker([27.5330, 88.5122]).addTo(map)
+          .bindPopup('Sikkim, India')
+          .openPopup();
+    </script>
+</body>
+</html>

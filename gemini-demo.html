@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini AI Demo - Monasteries 360°</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ai-components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gemini-demo-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gemini-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .gemini-header i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+        
+        .api-key-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .api-key-input {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .api-key-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .api-key-input button {
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .api-key-input button:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .demo-section {
+            margin-bottom: 30px;
+        }
+        
+        .demo-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .input-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .generate-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .generate-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .generate-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .result-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid var(--secondary-color);
+            min-height: 100px;
+        }
+        
+        .result-container.loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .status-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .status-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: inline-block;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="mountain-icon"><i class="fas fa-mountain"></i></span>
+                    <h1>Monastery 360°</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="gemini-demo.html" class="active">Gemini AI</a>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="account-icon"><i class="fas fa-user-circle"></i></a>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/placeholder.jpg');">
+            <div class="hero-content">
+                <h1>Gemini AI Integration</h1>
+                <p>Experience the power of Google's Gemini AI to enhance your monastery exploration</p>
+            </div>
+        </section>
+
+        <div class="gemini-demo-container">
+            <div class="gemini-header">
+                <i class="fas fa-robot"></i>
+                <h2>Gemini AI - Powered Tabs</h2>
+            </div>
+            <div class="tabs">
+                <div class="tab active" data-tab="monastery-description">Monastery Description</div>
+                <div class="tab" data-tab="cultural-insights">Cultural Insights</div>
+                <div class="tab" data-tab="travel-tips">Travel Tips</div>
+                <div class="tab" data-tab="ask-question">Ask a Question</div>
+            </div>
+            <div class="tab-content active" id="monastery-description">
+                <div class="demo-section">
+                    <h3>Monastery Description (AI Powered)</h3>
+                    <p>This section will soon provide AI-powered monastery descriptions.</p>
+                </div>
+            </div>
+            <div class="tab-content" id="cultural-insights">
+                <div class="demo-section">
+                    <h3>Cultural Insights (AI Powered)</h3>
+                    <p>This section will soon provide AI-powered cultural insights.</p>
+                </div>
+            </div>
+            <div class="tab-content" id="travel-tips">
+                <div class="demo-section">
+                    <h3>Travel Tips (AI Powered)</h3>
+                    <p>This section will soon provide AI-powered travel tips.</p>
+                </div>
+            </div>
+            <div class="tab-content" id="ask-question">
+                <div class="demo-section">
+                    <h3>Ask a Question (AI Powered)</h3>
+                    <p>This section will soon allow you to ask questions about monasteries, powered by AI.</p>
+                </div>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="monastery-description">Monastery Description</div>
+                <div class="tab" data-tab="cultural-insights">Cultural Insights</div>
+                <div class="tab" data-tab="travel-tips">Travel Tips</div>
+                <div class="tab" data-tab="ask-question">Ask a Question</div>
+            </div>
+            
+            <div class="tab-content active" id="monastery-description">
+                <div class="demo-section">
+                    <h3>Generate Monastery Description</h3>
+                    <div class="input-group">
+                        <label for="monasteryName">Monastery Name</label>
+                        <input type="text" id="monasteryName" placeholder="e.g., Rumtek Monastery">
+                    </div>
+                    <div class="input-group">
+                        <label for="monasteryLocation">Location</label>
+                        <input type="text" id="monasteryLocation" placeholder="e.g., Gangtok, Sikkim">
+                    </div>
+                    <div class="input-group">
+                        <label for="monasteryHistory">Brief History (optional)</label>
+                        <textarea id="monasteryHistory" placeholder="e.g., Founded in the 18th century, known for its Tibetan architecture"></textarea>
+                    </div>
+                    <button id="generateDescription" class="generate-btn" disabled>Generate Description</button>
+                    <div id="descriptionResult" class="result-container">
+                        <p>Your generated monastery description will appear here.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="cultural-insights">
+                <div class="demo-section">
+                    <h3>Generate Cultural Insights</h3>
+                    <div class="input-group">
+                        <label for="insightMonasteryName">Monastery Name</label>
+                        <input type="text" id="insightMonasteryName" placeholder="e.g., Pemayangtse Monastery">
+                    </div>
+                    <div class="input-group">
+                        <label for="traditions">Known Traditions (optional)</label>
+                        <textarea id="traditions" placeholder="e.g., Annual Cham dance festival, butter lamp offerings"></textarea>
+                    </div>
+                    <button id="generateInsights" class="generate-btn" disabled>Generate Cultural Insights</button>
+                    <div id="insightsResult" class="result-container">
+                        <p>Your generated cultural insights will appear here.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="travel-tips">
+                <div class="demo-section">
+                    <h3>Generate Travel Tips</h3>
+                    <div class="input-group">
+                        <label for="tipsMonasteryName">Monastery Name</label>
+                        <input type="text" id="tipsMonasteryName" placeholder="e.g., Tashiding Monastery">
+                    </div>
+                    <div class="input-group">
+                        <label for="tipsLocation">Location</label>
+                        <input type="text" id="tipsLocation" placeholder="e.g., West Sikkim">
+                    </div>
+                    <div class="input-group">
+                        <label for="bestTime">Best Time to Visit</label>
+                        <input type="text" id="bestTime" placeholder="e.g., October to May">
+                    </div>
+                    <button id="generateTips" class="generate-btn" disabled>Generate Travel Tips</button>
+                    <div id="tipsResult" class="result-container">
+                        <p>Your generated travel tips will appear here.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="ask-question">
+                <div class="demo-section">
+                    <h3>Ask a Question About Monasteries</h3>
+                    <div class="input-group">
+                        <label for="userQuestion">Your Question</label>
+                        <textarea id="userQuestion" placeholder="e.g., What is the significance of prayer flags in Buddhist monasteries?"></textarea>
+                    </div>
+                    <button id="answerQuestion" class="generate-btn" disabled>Get Answer</button>
+                    <div id="questionResult" class="result-container">
+                        <p>Your answer will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="mountain-icon"><i class="fas fa-mountain"></i></span>
+                    <h2>Monastery 360°</h2>
+                    <p>Explore the sacred monasteries of Sikkim through immersive virtual tours.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="monasteries.html">Monasteries</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="gemini-demo.html">Gemini AI</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter Signup</h3>
+                    <p>Stay updated with our latest tours and festival information.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Monastery 360°. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/gemini-ai.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // API Key handling
+            const apiKeyInput = document.getElementById('apiKeyInput');
+            const saveApiKeyBtn = document.getElementById('saveApiKey');
+            const apiKeyStatus = document.getElementById('apiKeyStatus');
+            const generateButtons = document.querySelectorAll('.generate-btn');
+            
+            // Check if API key is stored in localStorage
+            const storedApiKey = localStorage.getItem('geminiApiKey');
+            if (storedApiKey) {
+                apiKeyInput.value = storedApiKey;
+                initializeGeminiAI(storedApiKey);
+            }
+            
+            saveApiKeyBtn.addEventListener('click', function() {
+                const apiKey = apiKeyInput.value.trim();
+                if (apiKey) {
+                    // Save API key to localStorage
+                    localStorage.setItem('geminiApiKey', apiKey);
+                    initializeGeminiAI(apiKey);
+                } else {
+                    showStatus(apiKeyStatus, 'Please enter a valid API key', 'error');
+                }
+            });
+            
+            function initializeGeminiAI(apiKey) {
+                try {
+                    const initialized = window.geminiAI.initialize(apiKey);
+                    if (initialized) {
+                        showStatus(apiKeyStatus, 'API key saved and Gemini AI initialized successfully!', 'success');
+                        // Enable all generate buttons
+                        generateButtons.forEach(btn => btn.disabled = false);
+                    } else {
+                        showStatus(apiKeyStatus, 'Failed to initialize Gemini AI', 'error');
+                    }
+                } catch (error) {
+                    showStatus(apiKeyStatus, `Error: ${error.message}`, 'error');
+                }
+            }
+            
+            // Monastery Description Generator
+            const generateDescriptionBtn = document.getElementById('generateDescription');
+            const descriptionResult = document.getElementById('descriptionResult');
+            
+            generateDescriptionBtn.addEventListener('click', async function() {
+                const monasteryName = document.getElementById('monasteryName').value.trim();
+                const location = document.getElementById('monasteryLocation').value.trim();
+                const history = document.getElementById('monasteryHistory').value.trim();
+                
+                if (!monasteryName || !location) {
+                    alert('Please enter at least the monastery name and location');
+                    return;
+                }
+                
+                showLoading(descriptionResult);
+                
+                try {
+                    const description = await window.geminiAI.generateMonasteryDescription(monasteryName, location, history);
+                    descriptionResult.innerHTML = `<p>${description.replace(/\n/g, '<br>')}</p>`;
+                } catch (error) {
+                    descriptionResult.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                }
+            });
+            
+            // Cultural Insights Generator
+            const generateInsightsBtn = document.getElementById('generateInsights');
+            const insightsResult = document.getElementById('insightsResult');
+            
+            generateInsightsBtn.addEventListener('click', async function() {
+                const monasteryName = document.getElementById('insightMonasteryName').value.trim();
+                const traditions = document.getElementById('traditions').value.trim();
+                
+                if (!monasteryName) {
+                    alert('Please enter the monastery name');
+                    return;
+                }
+                
+                showLoading(insightsResult);
+                
+                try {
+                    const insights = await window.geminiAI.generateCulturalInsights(monasteryName, traditions);
+                    insightsResult.innerHTML = `<p>${insights.replace(/\n/g, '<br>')}</p>`;
+                } catch (error) {
+                    insightsResult.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                }
+            });
+            
+            // Travel Tips Generator
+            const generateTipsBtn = document.getElementById('generateTips');
+            const tipsResult = document.getElementById('tipsResult');
+            
+            generateTipsBtn.addEventListener('click', async function() {
+                const monasteryName = document.getElementById('tipsMonasteryName').value.trim();
+                const location = document.getElementById('tipsLocation').value.trim();
+                const bestTime = document.getElementById('bestTime').value.trim();
+                
+                if (!monasteryName || !location || !bestTime) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                showLoading(tipsResult);
+                
+                try {
+                    const tips = await window.geminiAI.generateTravelTips(monasteryName, location, bestTime);
+                    tipsResult.innerHTML = `<p>${tips.replace(/\n/g, '<br>')}</p>`;
+                } catch (error) {
+                    tipsResult.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                }
+            });
+            
+            // Question Answering
+            const answerQuestionBtn = document.getElementById('answerQuestion');
+            const questionResult = document.getElementById('questionResult');
+            
+            answerQuestionBtn.addEventListener('click', async function() {
+                const question = document.getElementById('userQuestion').value.trim();
+                
+                if (!question) {
+                    alert('Please enter a question');
+                    return;
+                }
+                
+                showLoading(questionResult);
+                
+                try {
+                    const answer = await window.geminiAI.answerMonasteryQuestion(question);
+                    questionResult.innerHTML = `<p>${answer.replace(/\n/g, '<br>')}</p>`;
+                } catch (error) {
+                    questionResult.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+                }
+            });
+            
+            // Helper functions
+            function showStatus(element, message, type) {
+                element.innerHTML = `<div class="status-message ${type}">${message}</div>`;
+                setTimeout(() => {
+                    element.innerHTML = '';
+                }, 5000);
+            }
+            
+            function showLoading(element) {
+                element.classList.add('loading');
+                element.innerHTML = '<div class="loading-spinner"></div>';
+            }
+        });
+    </script>
+    <script src="js/monastery-ai.js"></script>
+    <script src="js/chatbot.js"></script>
+    
+    <!-- Chatbot Container -->
+    <div id="monastery-chatbot-container" class="chatbot-container">
+        <button id="chatbot-toggle" class="chatbot-toggle" style="padding:0; border:none; background:transparent; width:60px; height:60px; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.15);">
+            <img src="images/gemini-ai-logo.png" alt="Gemini AI Logo" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+        </button>
+        <div id="chatbot-box" class="chatbot-box hidden">
+            <div class="chatbot-header" style="background:none; box-shadow:none; display:flex; justify-content:flex-end; align-items:center; padding:16px 16px 0 0;">
+                <button id="chatbot-close" class="chatbot-close" style="background:none; border:none; color:#333; font-size:1.5rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages"></div>
+            <div class="chatbot-input-container">
+                <input type="text" id="chatbot-input" placeholder="Ask about monasteries...">
+                <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

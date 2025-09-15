@@ -1,0 +1,716 @@
+/* Monastery Detail Page Styles */
+
+/* Header Styles */
+.monastery-detail-page {
+    padding-top: 80px; /* To account for fixed header */
+}
+
+.monastery-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 40px 0;
+}
+
+.monastery-title {
+    margin-bottom: 20px;
+}
+
+.monastery-title h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.monastery-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 1.1rem;
+}
+
+.monastery-meta i {
+    margin-right: 8px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid white;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Virtual Tour Section */
+.virtual-tour-section {
+    padding: 60px 0;
+    background-color: var(--light-color);
+}
+
+.tour-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+#panorama {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.tour-controls {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.audio-guides h3,
+.tour-navigation h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.language-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.language-btn {
+    padding: 8px 15px;
+    background-color: var(--light-color);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.language-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.audio-player {
+    width: 100%;
+}
+
+.audio-player audio {
+    width: 100%;
+}
+
+.hotspots-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hotspot-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--light-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.hotspot-link:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.hotspot-link i {
+    margin-right: 10px;
+}
+
+/* Monastery Information Section */
+.monastery-info-section {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.info-tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+}
+
+.tab-btn {
+    padding: 15px 25px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #777;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.tab-content {
+    min-height: 200px;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-pane p {
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Gallery Section */
+.gallery-section {
+    padding: 60px 0;
+    background-color: var(--light-color);
+}
+
+.gallery-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.gallery-tab {
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.gallery-tab.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.gallery-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-grid.active {
+    display: grid;
+}
+
+.gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.gallery-item-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    font-size: 0.9rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-item-caption {
+    transform: translateY(0);
+}
+
+/* Map Section */
+.map-section {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.map-container {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+#map {
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.map-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.location-info,
+.nearby-attractions {
+    background-color: var(--light-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+.location-info h3,
+.nearby-attractions h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.transport-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.transport-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.transport-option i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-top: 5px;
+}
+
+.transport-option h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--dark-color);
+}
+
+.transport-option p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.nearby-attractions ul {
+    list-style: none;
+}
+
+.nearby-attractions li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nearby-attractions li:last-child {
+    border-bottom: none;
+}
+
+.attraction-distance {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+/* Booking Section */
+.booking-section {
+    padding: 60px 0;
+    background-color: var(--light-color);
+}
+
+.booking-container {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.booking-form {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.btn-block {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.booking-info {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+}
+
+.booking-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+}
+
+.info-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item i {
+    font-size: 1.8rem;
+    margin-top: 5px;
+}
+
+.info-item h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.info-item p {
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+.info-item ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.info-item li {
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+/* Download Section */
+.download-section {
+    padding: 60px 0;
+    background-color: var(--dark-color);
+    color: white;
+    text-align: center;
+}
+
+.download-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.download-section p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.download-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.download-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    width: 150px;
+    color: white;
+    transition: var(--transition);
+}
+
+.download-btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+.download-btn i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .tour-container,
+    .map-container,
+    .booking-container {
+        grid-template-columns: 1fr;
+    }
+    
+    #panorama {
+        height: 400px;
+    }
+    
+    .monastery-title h1 {
+        font-size: 2rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-tabs,
+    .gallery-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+    }
+    
+    .tab-btn,
+    .gallery-tab {
+        flex: 0 0 auto;
+    }
+    
+    #panorama {
+        height: 350px;
+    }
+    
+    .monastery-meta {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .download-options {
+        gap: 10px;
+    }
+    
+    .download-btn {
+        width: 120px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .monastery-title h1 {
+        font-size: 1.8rem;
+    }
+    
+    #panorama {
+        height: 300px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .info-item i {
+        font-size: 1.5rem;
+    }
+}
+
+/* Pannellum Customization */
+.pnlm-container {
+    background-color: #f5f5f5;
+}
+
+.pnlm-hotspot {
+    height: 26px;
+    width: 26px;
+    border-radius: 13px;
+    border: 2px solid #fff;
+    background-color: var(--accent-color);
+}
+
+.pnlm-hotspot:hover {
+    background-color: var(--primary-color);
+}
+
+.pnlm-tooltip {
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.pnlm-load-button {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Lightbox for Gallery */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 80vh;
+    border: 5px solid white;
+    border-radius: 5px;
+}
+
+.lightbox-caption {
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    margin: 0 20px;
+}
+
+/* RazorPay Button Styling */
+.razorpay-payment-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.razorpay-payment-button:hover {
+    background-color: #e08e45;
+    transform: translateY(-3px);
+}

@@ -1,0 +1,13 @@
+node_modules
+my-fullstack-app
+js
+images
+.vscode
+workflows
+.github
+.json
+.md
+.ts
+.json
+.js
+.env

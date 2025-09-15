@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Monastery 360°</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(44,44,56,0.12);
+            padding: 32px 28px 24px 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(44,44,56,0.10);
+        }
+        .login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c2c38;
+            margin-bottom: 8px;
+        }
+        .login-desc {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .login-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .login-form label {
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #2c2c38;
+        }
+        .login-form input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        .login-form input:focus {
+            border-color: #a8edea;
+            outline: none;
+        }
+        .login-btn {
+            background: linear-gradient(90deg, #4a2c82 0%, #2c2c38 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(44,44,56,0.10);
+            transition: background 0.2s;
+        }
+        .login-btn:hover {
+            background: linear-gradient(90deg, #2c2c38 0%, #4a2c82 100%);
+        }
+        .login-links {
+            margin-top: 18px;
+            text-align: center;
+        }
+        .login-links a {
+            color: #4a2c82;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 8px;
+            transition: color 0.2s;
+        }
+        .login-links a:hover {
+            color: #2c2c38;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="images/moni.jpg" alt="Monastery Logo" class="login-logo">
+        <div class="login-title">Login</div>
+        <div class="login-desc">Sign in to explore Sikkim's sacred monasteries and virtual tours.</div>
+        <form class="login-form">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="submit" class="login-btn">Sign In</button>
+        </form>
+        <div class="login-links">
+            <a href="#">Forgot Password?</a>|
+            <a href="#">Create Account</a>
+        </div>
+    </div>
+</body>
+</html>

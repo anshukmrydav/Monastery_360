@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monastery Detail - Monasteries 360°</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/monastery-detail.css">
+    <link rel="stylesheet" href="css/ai-components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Pannellum for 360 viewer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="mountain-icon"><i class="fas fa-mountain"></i></span>
+                    <h1>Monastery 360°</h1>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="gemini-demo.html">Gemini AI</a>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="account-icon"><i class="fas fa-user-circle"></i></a>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="monastery-detail-page">
+        <!-- Monastery Header -->
+        <section class="monastery-header">
+            <div class="container">
+                <div class="monastery-title">
+                    <h1 id="monasteryName">Loading...</h1>
+                    <div class="monastery-meta">
+                        <span id="monasteryLocation"><i class="fas fa-map-marker-alt"></i> Loading...</span>
+                        <span id="monasteryYear"><i class="fas fa-calendar-alt"></i> Est. Loading...</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <a href="#virtual-tour" class="btn btn-primary"><i class="fas fa-vr-cardboard"></i> Start Virtual Tour</a>
+                    <a href="#booking" class="btn btn-secondary"><i class="fas fa-calendar-check"></i> Book a Visit</a>
+                    <button id="detailAiInsightsBtn" class="btn btn-tertiary"><i class="fas fa-robot"></i> AI Insights</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Virtual Tour Section -->
+        <section id="virtual-tour" class="virtual-tour-section">
+            <div class="container">
+                <h2>360° Virtual Tour</h2>
+                <div class="tour-container">
+                    <div id="panorama"></div>
+                    <div class="tour-controls">
+                        <div class="audio-guides">
+                            <h3>Audio Guide</h3>
+                            <div class="language-selector">
+                                <button class="language-btn active" data-lang="english">English</button>
+                                <button class="language-btn" data-lang="hindi">Hindi</button>
+                                <button class="language-btn" data-lang="nepali">Nepali</button>
+                                <button class="language-btn" data-lang="tibetan">Tibetan</button>
+                            </div>
+                            <div class="audio-player">
+                                <audio id="audioGuide" controls>
+                                    <source src="" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                        </div>
+                        <div class="tour-navigation">
+                            <h3>Tour Navigation</h3>
+                            <div class="hotspots-list" id="hotspotsNavigation">
+                                <!-- Hotspots will be added dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monastery Information -->
+        <section class="monastery-info-section">
+            <div class="container">
+                <div class="info-tabs">
+                    <button class="tab-btn active" data-tab="description">Description</button>
+                    <button class="tab-btn" data-tab="history">History</button>
+                    <button class="tab-btn" data-tab="architecture">Architecture</button>
+                    <button class="tab-btn" data-tab="festivals">Festivals</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="description">
+                        <p id="monasteryDescription">Loading monastery description...</p>
+                    </div>
+                    <div class="tab-pane" id="history">
+                        <p>Loading monastery history...</p>
+                    </div>
+                    <div class="tab-pane" id="architecture">
+                        <p>Loading architecture details...</p>
+                    </div>
+                    <div class="tab-pane" id="festivals">
+                        <div id="monasteryFestivals">
+                            <p>Loading festival information...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2>Gallery</h2>
+                <div class="gallery-tabs">
+                    <button class="gallery-tab active" data-gallery="photos">Photos</button>
+                    <button class="gallery-tab" data-gallery="manuscripts">Manuscripts</button>
+                    <button class="gallery-tab" data-gallery="murals">Murals</button>
+                    <button class="gallery-tab" data-gallery="artifacts">Artifacts</button>
+                </div>
+                <div class="gallery-content">
+                    <div class="gallery-grid active" id="photos">
+                        <!-- Photos will be added dynamically -->
+                    </div>
+                    <div class="gallery-grid" id="manuscripts">
+                        <!-- Manuscripts will be added dynamically -->
+                    </div>
+                    <div class="gallery-grid" id="murals">
+                        <!-- Murals will be added dynamically -->
+                    </div>
+                    <div class="gallery-grid" id="artifacts">
+                        <!-- Artifacts will be added dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="container">
+                <h2>Location & Nearby Attractions</h2>
+                <div class="map-container">
+                    <div id="map" style="position:relative;"></div>
+                    <!-- Show Map Button -->
+                    <button id="showLeafletMapBtn" style="position:absolute;top:10px;right:10px;z-index:10;padding:8px 16px;background:#1976d2;color:#fff;border:none;border-radius:4px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.15);">Show Map</button>
+                    <!-- Leaflet Modal -->
+                    <div id="leafletMapModal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;">
+                        <div style="position:relative;width:90vw;max-width:600px;height:70vh;margin:auto;background:#fff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.2);">
+                            <button id="closeLeafletMapModal" style="position:absolute;top:10px;right:10px;z-index:1001;background:#f44336;color:#fff;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;">Close</button>
+                            <div id="leafletMap" style="width:100%;height:100%;border-radius:8px;"></div>
+                        </div>
+                    </div>
+                    <div class="map-sidebar">
+                        <div class="location-info">
+                            <h3>Getting There</h3>
+                            <div class="transport-options">
+                                <div class="transport-option">
+                                    <i class="fas fa-car"></i>
+                                    <div>
+                                        <h4>By Car</h4>
+                                        <p id="carDirections">Loading directions...</p>
+                                    </div>
+                                </div>
+                                <div class="transport-option">
+                                    <i class="fas fa-bus"></i>
+                                    <div>
+                                        <h4>By Bus</h4>
+                                        <p id="busDirections">Loading directions...</p>
+                                    </div>
+                                </div>
+                                <div class="transport-option">
+                                    <i class="fas fa-walking"></i>
+                                    <div>
+                                        <h4>By Foot</h4>
+                                        <p id="walkingDirections">Loading directions...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nearby-attractions">
+                            <h3>Nearby Attractions</h3>
+                            <ul id="attractionsList">
+                                <!-- Attractions will be added dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="booking-section">
+            <div class="container">
+                <h2>Book Your Visit</h2>
+                <div class="booking-container">
+                    <div class="booking-form">
+                        <form id="visitBookingForm">
+                            <div class="form-group">
+                                <label for="visitDate">Visit Date</label>
+                                <input type="date" id="visitDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitTime">Visit Time</label>
+                                <select id="visitTime" required>
+                                    <option value="">Select a time slot</option>
+                                    <option value="09:00">9:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="12:00">12:00 PM</option>
+                                    <option value="13:00">1:00 PM</option>
+                                    <option value="14:00">2:00 PM</option>
+                                    <option value="15:00">3:00 PM</option>
+                                    <option value="16:00">4:00 PM</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitorCount">Number of Visitors</label>
+                                <input type="number" id="visitorCount" min="1" max="20" value="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="guidedTour">Guided Tour</label>
+                                <select id="guidedTour" required>
+                                    <option value="no">No</option>
+                                    <option value="english">Yes - English</option>
+                                    <option value="hindi">Yes - Hindi</option>
+                                    <option value="nepali">Yes - Nepali</option>
+                                    <option value="tibetan">Yes - Tibetan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitorName">Full Name</label>
+                                <input type="text" id="visitorName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitorEmail">Email</label>
+                                <input type="email" id="visitorEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitorPhone">Phone</label>
+                                <input type="tel" id="visitorPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="specialRequests">Special Requests</label>
+                                <textarea id="specialRequests" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Proceed to Payment</button>
+                        </form>
+                    </div>
+                    <div class="booking-info">
+                        <h3>Visiting Information</h3>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Opening Hours</h4>
+                                <p>Daily: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-ticket-alt"></i>
+                            <div>
+                                <h4>Entry Fee</h4>
+                                <p>Indians: ₹50 per person</p>
+                                <p>Foreigners: ₹200 per person</p>
+                                <p>Camera: ₹100 (additional)</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-user-friends"></i>
+                            <div>
+                                <h4>Guided Tours</h4>
+                                <p>Available in English, Hindi, Nepali, and Tibetan</p>
+                                <p>Additional ₹500 per group</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-info-circle"></i>
+                            <div>
+                                <h4>Important Notes</h4>
+                                <ul>
+                                    <li>Dress modestly when visiting the monastery</li>
+                                    <li>Remove shoes before entering prayer halls</li>
+                                    <li>Photography may be restricted in certain areas</li>
+                                    <li>Maintain silence and respect during prayer times</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section class="download-section">
+            <div class="container">
+                <h2>Offline Access</h2>
+                <p>Download monastery information for offline access during your visit.</p>
+                <div class="download-options">
+                    <a href="#" class="download-btn" id="downloadTour">
+                        <i class="fas fa-vr-cardboard"></i>
+                        <span>360° Tour</span>
+                    </a>
+                    <a href="#" class="download-btn" id="downloadAudio">
+                        <i class="fas fa-headphones"></i>
+                        <span>Audio Guide</span>
+                    </a>
+                    <a href="#" class="download-btn" id="downloadMap">
+                        <i class="fas fa-map"></i>
+                        <span>Offline Map</span>
+                    </a>
+                    <a href="#" class="download-btn" id="downloadInfo">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Monastery Info</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="mountain-icon"><i class="fas fa-mountain"></i></span>
+                    <h2>Monastery 360°</h2>
+                    <p>Explore the sacred monasteries of Sikkim through immersive virtual tours.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="monasteries.html">Monasteries</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="gemini-demo.html">Gemini AI</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter Signup</h3>
+                    <p>Stay updated with our latest tours and festival information.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit" class="btn-submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Monastery 360°. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- RazorPay Integration -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="js/gemini-ai.js"></script>
+    <script src="js/monastery-ai.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/monasteries.js"></script>
+    <script src="js/monastery-detail.js"></script>
+    <script src="js/google-image-api.js"></script>
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Leaflet Routing Machine -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script>
+    // Rumtek Monastery coordinates (East Sikkim)
+    const monasteryLatLng = [27.3331, 88.6138];
+    let leafletMap, routingControl;
+    document.getElementById('showLeafletMapBtn').onclick = function() {
+        document.getElementById('leafletMapModal').style.display = 'flex';
+        setTimeout(() => {
+            if (!leafletMap) {
+                leafletMap = L.map('leafletMap').setView(monasteryLatLng, 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(leafletMap);
+                L.marker(monasteryLatLng).addTo(leafletMap).bindPopup('Rumtek Monastery').openPopup();
+            } else {
+                leafletMap.invalidateSize();
+                leafletMap.setView(monasteryLatLng, 13);
+            }
+            // Try to get user's location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(pos) {
+                    const userLatLng = [pos.coords.latitude, pos.coords.longitude];
+                    if (routingControl) {
+                        leafletMap.removeControl(routingControl);
+                    }
+                    routingControl = L.Routing.control({
+                        waypoints: [
+                            L.latLng(userLatLng[0], userLatLng[1]),
+                            L.latLng(monasteryLatLng[0], monasteryLatLng[1])
+                        ],
+                        routeWhileDragging: false,
+                        show: false,
+                        lineOptions: { styles: [{color: '#1976d2', weight: 5}] },
+                        router: L.Routing.osrmv1({serviceUrl: 'https://router.project-osrm.org/route/v1'})
+                    }).addTo(leafletMap);
+                }, function() {
+                    alert('Could not get your location. Please allow location access.');
+                });
+            } else {
+                alert('Geolocation is not supported by your browser.');
+            }
+        }, 200);
+    };
+    document.getElementById('closeLeafletMapModal').onclick = function() {
+        document.getElementById('leafletMapModal').style.display = 'none';
+        if (routingControl && leafletMap) {
+            leafletMap.removeControl(routingControl);
+            routingControl = null;
+        }
+    };
+    </script>
+    
+    <!-- Chatbot Container -->
+    <div id="monastery-chatbot-container" class="chatbot-container">
+        <button id="chatbot-toggle" class="chatbot-toggle">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div id="chatbot-box" class="chatbot-box hidden">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> Monastery AI Assistant</h3>
+                <button id="chatbot-close" class="chatbot-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages"></div>
+            <div class="chatbot-input-container">
+                <input type="text" id="chatbot-input" placeholder="Ask about monasteries...">
+                <button id="chatbot-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
