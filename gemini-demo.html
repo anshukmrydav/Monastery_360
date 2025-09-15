@@ -196,79 +196,16 @@
     </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html">
-                    <span class="mountain-icon"><i class="fas fa-mountain"></i></span>
-                    <h1>Monastery 360°</h1>
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="gemini-demo.html" class="active">Gemini AI</a>
-            </div>
-            <div class="user-actions">
-                <a href="#" class="account-icon"><i class="fas fa-user-circle"></i></a>
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
-
     <main>
-        <section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/placeholder.jpg');">
-            <div class="hero-content">
-                <h1>Gemini AI Integration</h1>
-                <p>Experience the power of Google's Gemini AI to enhance your monastery exploration</p>
-            </div>
-        </section>
-
         <div class="gemini-demo-container">
-            <div class="gemini-header">
-                <i class="fas fa-robot"></i>
-                <h2>Gemini AI - Powered Tabs</h2>
+            <h2>Gemini Chatbot</h2>
+            <div class="input-group">
+                <label for="user-question">Ask anything about monasteries:</label>
+                <input type="text" id="user-question" placeholder="Type your question here...">
+                <button id="ask-btn">Ask</button>
             </div>
-            <div class="tabs">
-                <div class="tab active" data-tab="monastery-description">Monastery Description</div>
-                <div class="tab" data-tab="cultural-insights">Cultural Insights</div>
-                <div class="tab" data-tab="travel-tips">Travel Tips</div>
-                <div class="tab" data-tab="ask-question">Ask a Question</div>
-            </div>
-            <div class="tab-content active" id="monastery-description">
-                <div class="demo-section">
-                    <h3>Monastery Description (AI Powered)</h3>
-                    <p>This section will soon provide AI-powered monastery descriptions.</p>
-                </div>
-            </div>
-            <div class="tab-content" id="cultural-insights">
-                <div class="demo-section">
-                    <h3>Cultural Insights (AI Powered)</h3>
-                    <p>This section will soon provide AI-powered cultural insights.</p>
-                </div>
-            </div>
-            <div class="tab-content" id="travel-tips">
-                <div class="demo-section">
-                    <h3>Travel Tips (AI Powered)</h3>
-                    <p>This section will soon provide AI-powered travel tips.</p>
-                </div>
-            </div>
-            <div class="tab-content" id="ask-question">
-                <div class="demo-section">
-                    <h3>Ask a Question (AI Powered)</h3>
-                    <p>This section will soon allow you to ask questions about monasteries, powered by AI.</p>
-                </div>
-            </div>
-            
-            <div class="tabs">
-                <div class="tab active" data-tab="monastery-description">Monastery Description</div>
-                <div class="tab" data-tab="cultural-insights">Cultural Insights</div>
-                <div class="tab" data-tab="travel-tips">Travel Tips</div>
-                <div class="tab" data-tab="ask-question">Ask a Question</div>
-            </div>
+            <div id="response" class="result-container"></div>
+        </div>
             
             <div class="tab-content active" id="monastery-description">
                 <div class="demo-section">

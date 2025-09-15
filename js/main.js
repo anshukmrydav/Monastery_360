@@ -29,6 +29,11 @@ function initializeAIComponents() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Redirect to login page if not authenticated
+    if (!localStorage.getItem('userLoggedIn') && !window.location.pathname.endsWith('login.html')) {
+        window.location.href = 'login.html';
+        return;
+    }
     // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.querySelector('.nav-links');
