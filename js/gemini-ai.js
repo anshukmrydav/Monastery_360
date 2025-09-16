@@ -4,7 +4,7 @@ class GeminiAI {
     constructor(apiKey) {
         this.apiKey = apiKey;
         this.baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
-        this.model = 'models/gemini-pro';
+        this.model = 'models/gemini-1.5-pro-latest';
         this.initialized = false;
     }
 
@@ -28,10 +28,6 @@ class GeminiAI {
 
     // Generate text response based on prompt
     async generateText(prompt, options = {}) {
-        if (!this.isInitialized()) {
-            throw new Error('Gemini AI is not initialized. Please call initialize() with a valid API key first.');
-        }
-
         const defaultOptions = {
             temperature: 0.7,
             maxOutputTokens: 800,
@@ -42,25 +38,28 @@ class GeminiAI {
         const requestOptions = { ...defaultOptions, ...options };
         
         try {
-            const response = await fetch(`${this.baseUrl}/${this.model}:generateContent?key=${this.apiKey}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: prompt
-                        }]
-                    }],
-                    generationConfig: {
-                        temperature: requestOptions.temperature,
-                        maxOutputTokens: requestOptions.maxOutputTokens,
-                        topK: requestOptions.topK,
-                        topP: requestOptions.topP
-                    }
-                })
-            });
+            const response = await fetch(
+                `${this.baseUrl}/${this.model}:generateContent?key=${this.apiKey}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }],
+                        generationConfig: {
+                            temperature: requestOptions.temperature,
+                            maxOutputTokens: requestOptions.maxOutputTokens,
+                            topK: requestOptions.topK,
+                            topP: requestOptions.topP
+                        }
+                    })
+                }
+            );
 
             if (!response.ok) {
                 const errorData = await response.json();
@@ -113,7 +112,7 @@ class GeminiAI {
 }
 
 // Create a singleton instance
-const geminiAI = new GeminiAI();
+const geminiAI = new GeminiAI("AIzaSyCBliC6al-UmmiPhmK2NU7mHxpCd6vp1Mw");
 
 // Export the singleton instance
 window.geminiAI = geminiAI;

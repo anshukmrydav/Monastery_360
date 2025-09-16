@@ -10,26 +10,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
+    <<header>
+        <nav class="navbar">
             <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo.svg" alt="Monasteries 360°">
+                <a href="index.html" style="display:flex;align-items:center;gap:10px;">
+                    <img src="images/moni.jpg" alt="Monastery Logo" style="height:40px;width:40px;object-fit:cover;border-radius:50%;margin-left:12px;">
+                    <h1 style="margin:0;font-size:2rem;color:#2c2c38;font-weight:700;">Monastery 360°</h1>
                 </a>
             </div>
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="gemini-demo.html">Gemini AI</a></li>
-                </ul>
-                <div class="mobile-menu-toggle">
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="gemini-demo.html">Gemini AI</a>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="account-icon"><i class="fas fa-user-circle"></i></a>
+                <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
+                </button>
+            </div>
+        </nav>
     </header>
+
 
     <main>
         <section class="about-hero">
@@ -128,12 +132,12 @@
                 </div>
                 
                 <div class="team-section">
-                    <h2>Our Team</h2>
+                    <h2>Our Partners</h2>
                     <p>Monasteries 360° is a collaborative project bringing together experts in technology, cultural heritage preservation, and tourism development. Our team includes:</p>
                     
                     <div class="team-grid">
                         <div class="team-member">
-                            <img src="images/Phensong_Monastery.jpeg" alt="Cultural Researchers">
+                            <img src="images/research.jpeg" alt="Cultural Researchers">
                             <h3>Cultural Researchers</h3>
                             <p>Experts in Sikkimese history, Buddhist traditions, and local customs who ensure the accuracy of our content.</p>
                         </div>
@@ -145,7 +149,7 @@
                         </div>
                         
                         <div class="team-member">
-                            <img src="images/Dubdi_Monastery_2.jpeg" alt="Local Guides">
+                            <img src="images/WhatsApp Image 2025-09-16 at 11.03.20 AM.jpeg" alt="Local Guides">
                             <h3>Local Guides</h3>
                             <p>Knowledgeable locals who provide authentic insights and narrations for our audio guides.</p>
                         </div>
@@ -165,8 +169,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="images/logo.svg" alt="Monasteries 360°">
-                    <p>Explore the sacred monasteries of Sikkim through immersive virtual experiences.</p>
+<img src="images/moni.jpg" alt="Monasteries 360°" style="height:40px;width:40px;border-radius:50%;object-fit:cover;">                    <p>Explore the sacred monasteries of Sikkim through immersive virtual experiences.</p>
                 </div>
                 
                 <div class="footer-links">
@@ -196,9 +199,8 @@
                 </div>
                 
                 <div class="footer-newsletter">
-                    <h3>Newsletter</h3>
+                    
                     <p>Subscribe to receive updates on new monasteries and features.</p>
-                    <form class="newsletter-form">
                         <input type="email" placeholder="Your email address" required>
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </form>
