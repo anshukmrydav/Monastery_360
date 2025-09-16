@@ -112,7 +112,7 @@ class GeminiAI {
 }
 
 // Create a singleton instance
-const geminiAI = new GeminiAI("AIzaSyCBliC6al-UmmiPhmK2NU7mHxpCd6vp1Mw");
+const geminiAI = new GeminiAI("AIzaSyBGmnDkhlaLMNLdeFMSO-UDoO5m62pX5sY");
 
 // Export the singleton instance
 window.geminiAI = geminiAI;

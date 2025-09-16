@@ -193,6 +193,64 @@
         .tab-content.active {
             display: block;
         }
+        .container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  font-family: monospace, monospace;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #609ba8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #507b85;
+}
+
+.result-box {
+  background-color: #f8fafb;
+  border-left: 5px solid #82a99a;
+  padding: 16px;
+  min-height: 100px;
+  box-sizing: border-box;
+  color: #333;
+  font-size: 15px;
+}
+
     </style>
 </head>
 <body>
@@ -265,10 +323,7 @@
                         <label for="monasteryLocation">Location</label>
                         <input type="text" id="monasteryLocation" placeholder="e.g., Gangtok, Sikkim">
                     </div>
-                    <div class="input-group">
-                        <label for="monasteryHistory">Brief History (optional)</label>
-                        <textarea id="monasteryHistory" placeholder="e.g., Founded in the 18th century, known for its Tibetan architecture"></textarea>
-                    </div>
+                    
                     <button id="generateDescription" class="generate-btn">Generate Description</button>
                     <div id="descriptionResult" class="result-container">
                         <p>Your generated monastery description will appear here.</p>
@@ -276,45 +331,64 @@
                 </div>
             </div>
             
-            <div class="tab-content" id="cultural-insights">
-                <div class="demo-section">
-                    <h3>Generate Cultural Insights</h3>
-                    <div class="input-group">
-                        <label for="insightMonasteryName">Monastery Name</label>
-                        <input type="text" id="insightMonasteryName" placeholder="e.g., Pemayangtse Monastery">
-                    </div>
-                    <div class="input-group">
-                        <label for="traditions">Known Traditions (optional)</label>
-                        <textarea id="traditions" placeholder="e.g., Annual Cham dance festival, butter lamp offerings"></textarea>
-                    </div>
-                    <button id="generateInsights" class="generate-btn" disabled>Generate Cultural Insights</button>
-                    <div id="insightsResult" class="result-container">
-                        <p>Your generated cultural insights will appear here.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="travel-tips">
-                <div class="demo-section">
-                    <h3>Generate Travel Tips</h3>
-                    <div class="input-group">
-                        <label for="tipsMonasteryName">Monastery Name</label>
-                        <input type="text" id="tipsMonasteryName" placeholder="e.g., Tashiding Monastery">
-                    </div>
-                    <div class="input-group">
-                        <label for="tipsLocation">Location</label>
-                        <input type="text" id="tipsLocation" placeholder="e.g., West Sikkim">
-                    </div>
-                    <div class="input-group">
-                        <label for="bestTime">Best Time to Visit</label>
-                        <input type="text" id="bestTime" placeholder="e.g., October to May">
-                    </div>
-                    <button id="generateTips" class="generate-btn" disabled>Generate Travel Tips</button>
-                    <div id="tipsResult" class="result-container">
-                        <p>Your generated travel tips will appear here.</p>
-                    </div>
-                </div>
-            </div>
+   <style>
+  /* Add this CSS to your existing <style> block */
+  .side-by-side-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* For responsiveness */
+  }
+
+  .side-by-side-container .tab-content {
+    flex: 1;
+    min-width: 300px; /* minimum width to avoid too narrow */
+  }
+</style>
+
+<!-- Wrap these two tab contents inside a new container -->
+<div class="side-by-side-container">
+  <div class="tab-content" id="cultural-insights">
+      <div class="demo-section">
+          <h3>Generate Cultural Insights</h3>
+          <div class="input-group">
+              <label for="insightMonasteryName">Monastery Name</label>
+              <input type="text" id="insightMonasteryName" placeholder="e.g., Pemayangtse Monastery">
+          </div>
+          <div class="input-group">
+              <label for="traditions">Known Traditions (optional)</label>
+              <textarea id="traditions" placeholder="e.g., Annual Cham dance festival, butter lamp offerings"></textarea>
+          </div>
+          <button id="generateInsights" class="generate-btn" disabled>Generate Cultural Insights</button>
+          <div id="insightsResult" class="result-container">
+              <p>Your generated cultural insights will appear here.</p>
+          </div>
+      </div>
+  </div>
+
+  <div class="tab-content" id="travel-tips">
+      <div class="demo-section">
+          <h3>Generate Travel Tips</h3>
+          <div class="input-group">
+              <label for="tipsMonasteryName">Monastery Name</label>
+              <input type="text" id="tipsMonasteryName" placeholder="e.g., Tashiding Monastery">
+          </div>
+          <div class="input-group">
+              <label for="tipsLocation">Location</label>
+              <input type="text" id="tipsLocation" placeholder="e.g., West Sikkim">
+          </div>
+          <div class="input-group">
+              <label for="bestTime">Best Time to Visit</label>
+              <input type="text" id="bestTime" placeholder="e.g., October to May">
+          </div>
+          <button id="generateTips" class="generate-btn" disabled>Generate Travel Tips</button>
+          <div id="tipsResult" class="result-container">
+              <p>Your generated travel tips will appear here.</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+
             
             <div class="tab-content" id="ask-question">
                 <div class="demo-section">
